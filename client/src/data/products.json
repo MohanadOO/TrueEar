@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "name": "SoundCore Air 2 Pro",
+    "img": "/images/soundcore.jpg",
+    "price": 49.99,
+    "stars": 4
+  },
+  {
+    "id": 2,
+    "name": "Airpods",
+    "img": "/images/airpods.jpg",
+    "price": 119.99,
+    "stars": 4
+  },
+  {
+    "id": 3,
+    "name": "Galaxy Buds",
+    "img": "/images/galaxy_buds.jpg",
+    "price": 59.99,
+    "stars": 5
+  },
+  {
+    "id": 4,
+    "name": "Galaxy Mini",
+    "img": "/images/galaxy_buds.jpg",
+    "price": 15.99,
+    "stars": 3
+  },
+  {
+    "id": 5,
+    "name": "SoundCore Brookie Edition",
+    "img": "/images/galaxy_buds.jpg",
+    "price": 29.99,
+    "stars": 5
+  }
+]
