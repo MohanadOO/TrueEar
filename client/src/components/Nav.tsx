@@ -8,9 +8,12 @@ import { Link, NavLink } from 'react-router-dom'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 import { formatCurrency } from '../utilities/formatCurrency'
 import { useQuery, gql } from '@apollo/client'
-// import products from '../data/products.json'
 
 import CartItem from './CartItem'
+
+import { useAuth } from '../context/AuthContext'
+
+import toast from 'react-hot-toast'
 
 const ITEMS = gql`
   query GetItems {
@@ -36,12 +39,7 @@ function Nav() {
   const { cartQuantity, cartItems } = useShoppingCart()
   const { loading, error, data } = useQuery(ITEMS)
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error ❌</p>
-
-  const items = data.items.data
-
-  const userLoggedIn = false
+  const { currentUser, logOut } = useAuth()
 
   function toggleTheme() {
     if (localStorage.theme === 'night') {
@@ -50,6 +48,11 @@ function Nav() {
     }
     localStorage.theme = 'night'
     return (document.documentElement.dataset.theme = 'night')
+  }
+
+  function signOut() {
+    logOut()
+    toast.success(<b>You Signed Out</b>)
   }
 
   return (
@@ -97,17 +100,27 @@ function Nav() {
               About <AiOutlineInfoCircle />
             </NavLink>
           </li>
-          {!userLoggedIn ? (
-            <li className='ml-auto mr-5'>
-              <Link className='btn btn-primary btn-outline' to='/signup'>
-                Sign Up
+          {!loading && !currentUser ? (
+            <li className='ml-auto mr-3'>
+              <Link className='btn btn-primary btn-outline' to='/login'>
+                Log In
               </Link>
             </li>
-          ) : (
+          ) : currentUser ? (
             <li className='ml-auto mr-3 dropdown dropdown-end'>
               <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
                 <div className='w-10 rounded-full'>
-                  <img src='https://api.lorem.space/image/face?hash=33791' />
+                  {currentUser?.picture ? (
+                    <img src={currentUser.picture} />
+                  ) : (
+                    <div className='avatar placeholder'>
+                      <div className='bg-neutral-focus text-neutral-content rounded-full w-10'>
+                        <span className='text-lg'>
+                          {currentUser.username.split('')[0]}
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </label>
               <ul
@@ -115,16 +128,18 @@ function Nav() {
                 className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
               >
                 <li>
-                  <a>Settings</a>
+                  <Link to='/update-profile'>Update Profile</Link>
                 </li>
                 <li>
-                  <a>Logout</a>
+                  <a onClick={signOut}>Logout</a>
                 </li>
               </ul>
             </li>
+          ) : (
+            <li className='ml-auto btn btn-ghost loading'></li>
           )}
 
-          <li className=' dropdown dropdown-content dropdown-end mr-2'>
+          <li className=' dropdown dropdown-content dropdown-end '>
             <label tabIndex={0} className='btn btn-primary btn-ghost'>
               <div className='indicator'>
                 <svg
@@ -155,7 +170,11 @@ function Nav() {
               }`}
             >
               <div className='card-body'>
-                {cartQuantity === 0 ? (
+                {loading ? (
+                  <p>Loading...</p>
+                ) : error ? (
+                  <p>Error ❌</p>
+                ) : cartQuantity === 0 ? (
                   <span className='font-bold '>Cart Is Empty</span>
                 ) : (
                   <>
@@ -163,7 +182,7 @@ function Nav() {
                       <span className='badge badge-md mr-2'>
                         {cartQuantity}
                       </span>
-                      items
+                      {cartQuantity > 1 ? 'Items' : 'Item'}
                     </span>
                     {cartItems.map((item) => {
                       return <CartItem key={item?.id} {...item} />
@@ -172,7 +191,7 @@ function Nav() {
                       <span className='mr-2'>Total</span>
                       {formatCurrency(
                         cartItems.reduce((total, cartItem) => {
-                          const item = items.find(
+                          const item = data.items.data.find(
                             (item: queryItemType) => item.id === cartItem.id
                           )
                           return (
