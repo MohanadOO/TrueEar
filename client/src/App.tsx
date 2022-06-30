@@ -3,8 +3,11 @@ import About from './routes/About'
 import ErrorPage from './routes/ErrorPage'
 import Home from './routes/Home'
 import Product from './routes/Product'
+import SignUp from './routes/SignUp/SignUp'
+import Login from './routes/Login/Login'
 import SignUp from './routes/SignUp'
 import Store from './routes/Store'
+import PublicRoute from './routes/PublicRoute'
 
 //Components
 import Nav from './components/Nav'
@@ -14,13 +17,8 @@ import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import { Routes, Route } from 'react-router-dom'
 import { ShoppingCartProvider } from './context/ShoppingCartContext'
-
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
-
-const client = new ApolloClient({
-  uri: 'http://localhost:1337/graphql',
-  cache: new InMemoryCache(),
-})
+import PrivateRoute from './routes/PrivateRoute'
+import UpdateProfile from './routes/UpdateProfile'
 
 function App() {
   useEffect(() => {
@@ -32,23 +30,33 @@ function App() {
   }, [])
 
   return (
-    <ApolloProvider client={client}>
-      <ShoppingCartProvider>
-        <Toaster />
+    <ShoppingCartProvider>
+      <Toaster />
+      <main className='flex flex-col min-h-screen'>
         <Nav />
-        <div className='mt-28'>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='store' element={<Store />} />
-            <Route path='store/:id' element={<Product />} />
-            <Route path='about' element={<About />} />
+        <Routes>
+          {/* Public Routes */}
+          <Route path='/' element={<Home />} />
+          <Route path='store' element={<Store />} />
+          <Route path='store/:id' element={<Product />} />
+          <Route path='about' element={<About />} />
+
+          {/* Private Routes */}
+          <Route element={<PrivateRoute />}>
+            <Route path='/update-profile' element={<UpdateProfile />} />
+          </Route>
+
+          {/* Only unAuthorized Routes */}
+          <Route element={<PublicRoute />}>
             <Route path='signup' element={<SignUp />} />
-            <Route path='*' element={<ErrorPage />} />
-          </Routes>
-          <Footer />
-        </div>
-      </ShoppingCartProvider>
-    </ApolloProvider>
+            <Route path='login' element={<Login />} />
+          </Route>
+
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+        <Footer />
+      </main>
+    </ShoppingCartProvider>
   )
 }
 
