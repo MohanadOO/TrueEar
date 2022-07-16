@@ -2,30 +2,8 @@ import { useShoppingCart } from '../context/ShoppingCartContext'
 import { formatCurrency } from '../utilities/formatCurrency'
 import { Link } from 'react-router-dom'
 
-import { useQuery, gql } from '@apollo/client'
-
-//Item GraphQl query
-const ITEM = gql`
-  query GetItem($id: ID!) {
-    item(id: $id) {
-      data {
-        id
-        attributes {
-          title
-          price
-          stars
-          img {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
+import { useQuery } from '@apollo/client'
+import ITEM from '../Graphql/CartItemQueries'
 
 type CartItemProps = {
   id: number
@@ -58,7 +36,7 @@ function CartItem({ id, quantity }: CartItemProps) {
           <Link to={`store/${id}`}>
             <img
               className='h-24 w-32 object-cover rounded-lg'
-              src={`http://localhost:1337${item.attributes.img.data.attributes.formats.thumbnail.url}`}
+              src={item.attributes.img.data.attributes.formats.thumbnail.url}
               alt={`${item.attributes.title}_avatar`}
             />
           </Link>

@@ -4,10 +4,12 @@ import {
   AiOutlineInfoCircle,
   AiOutlineShopping,
 } from 'react-icons/ai'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 import { formatCurrency } from '../utilities/formatCurrency'
-import { useQuery, gql } from '@apollo/client'
+
+import { useQuery } from '@apollo/client'
+import ITEMS from '../Graphql/NavQueries'
 
 import CartItem from './CartItem'
 

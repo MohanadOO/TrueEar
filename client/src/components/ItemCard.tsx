@@ -37,7 +37,7 @@ function ItemCard({ id, title, price, stars, img }: ItemCardProps) {
         >
           <img
             className='h-[220px] w-full object-cover rounded-sm'
-            src={`http://localhost:1337${img.data.attributes.formats.medium.url}`}
+            src={img.data?.attributes.formats.medium.url}
             alt={`${title}_img`}
           />
         </Link>
