@@ -4,9 +4,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 
 import { useMutation } from '@apollo/client'
-import { useAuth } from '../../context/AuthContext'
+import REGISTER from '../Graphql/SignUpQueries'
 
-import REGISTER from './SignUpQueries'
+import { useAuth } from '../context/AuthContext'
 
 type Inputs = {
   username: string
@@ -21,7 +21,6 @@ function SignUp() {
   const from = location.state?.from?.pathName || '/store'
 
   const [isLoading, setIsLoading] = useState(false)
-
   const [registerUserFunction] = useMutation(REGISTER)
   const { signUp, setCurrentUser } = useAuth()
 
@@ -32,7 +31,6 @@ function SignUp() {
     formState: { errors },
   } = useForm<Inputs>()
 
-  //Focus on username input field on Load.
   useEffect(() => {
     setFocus('username')
   }, [])
@@ -60,8 +58,8 @@ function SignUp() {
         .then(({ data }) => {
           setIsLoading(false)
 
-          const user = data.register.user
           const token = data.register.jwt
+          const user = data.login.user
 
           localStorage.setItem('token', token)
           setCurrentUser(user)
@@ -78,10 +76,8 @@ function SignUp() {
     <section className='w-full max-w-sm card card-bordered bg-primary/5  p-10 mx-5 self-center my-auto'>
       <h1 className='card-title text-center mb-3 mx-auto'>Sign Up</h1>
       <div className='flex w-full justify-around mb-5'>
-        <a href='https://7460-95-186-22-66.eu.ngrok.io/api/connect/google'>
           Google
         </a>
-        <a href='https://7460-95-186-22-66.eu.ngrok.io/api/connect/github'>
           GitHub
         </a>
       </div>

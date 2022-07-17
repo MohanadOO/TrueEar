@@ -1,12 +1,17 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate, useLocation } from 'react-router-dom'
+import {
+  Link,
+  useNavigate,
+  useLocation,
+  NavigateFunction,
+} from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useEffect, useState } from 'react'
 
 import { useMutation } from '@apollo/client'
-import { useAuth } from '../../context/AuthContext'
+import { LOGIN } from '../Graphql/LoginQueries'
 
-import LOGIN from './LoginQueries'
+import { useAuth } from '../context/AuthContext'
 
 type Inputs = {
   username: string
@@ -14,12 +19,11 @@ type Inputs = {
 }
 
 function Login() {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const from = location.state?.from?.pathname || '/store'
+  let navigate = useNavigate()
+  let location = useLocation()
+  const from = location?.state?.from?.pathname || '/store'
 
   const [isLoading, setIsLoading] = useState(false)
-
   const [loginUserFunction] = useMutation(LOGIN)
   const { login, setCurrentUser } = useAuth()
 
@@ -30,7 +34,6 @@ function Login() {
     formState: { errors },
   } = useForm<Inputs>()
 
-  //Focus on Username input field on Load.
   useEffect(() => {
     setFocus('username')
   }, [])
@@ -55,8 +58,8 @@ function Login() {
       .then(({ data }) => {
         setIsLoading(false)
 
-        const user = data.login.user
         const token = data.login.jwt
+        const user = data.login.user
 
         localStorage.setItem('token', token)
         setCurrentUser(user)
@@ -74,15 +77,11 @@ function Login() {
       <div className='flex w-full justify-around mb-5'>
         <a
           className='btn btn-sm btn-outline capitalize'
-          target='_blank'
-          href='https://516f-151-255-198-186.eu.ngrok.io/api/connect/google'
         >
           Google
         </a>
         <a
           className='btn btn-sm btn-outline capitalize'
-          target='_blank'
-          href='https://516f-151-255-198-186.eu.ngrok.io/api/connect/github'
         >
           GitHub
         </a>
@@ -153,7 +152,7 @@ function Login() {
         </Link>
       </div>
       <div className='mt-2 text-center'>
-        <Link className='text-primary' to='/forgot-password'>
+        <Link className='text-primary' to='/reset-password'>
           Forgot Your Password
         </Link>
       </div>
