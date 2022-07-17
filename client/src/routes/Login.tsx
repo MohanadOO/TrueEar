@@ -12,6 +12,7 @@ import { useMutation } from '@apollo/client'
 import { LOGIN } from '../Graphql/LoginQueries'
 
 import { useAuth } from '../context/AuthContext'
+import { AiFillGithub, AiFillGoogleCircle } from 'react-icons/ai'
 
 type Inputs = {
   username: string
@@ -72,22 +73,26 @@ function Login() {
   }
 
   return (
-    <div className='w-full max-w-sm card card-bordered bg-primary/5 py-10 px-6 self-center my-auto'>
+    <div className='w-full max-w-xs md:max-w-sm card card-bordered bg-primary/5 py-10 px-6 self-center my-auto'>
       <h1 className='card-title text-center mb-3 mx-auto'>Log in</h1>
-      <div className='flex w-full justify-around mb-5'>
+      <div className='flex justify-evenly w-full mb-3'>
         <a
-          className='btn btn-sm btn-outline capitalize'
+          className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
+          href='https://f525-64-65-118-138.eu.ngrok.io/api/connect/google'
         >
-          Google
+          <AiFillGoogleCircle />
+          <span>Google</span>
         </a>
         <a
-          className='btn btn-sm btn-outline capitalize'
+          className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
+          href='https://f525-64-65-118-138.eu.ngrok.io/api/connect/github'
         >
-          GitHub
+          <AiFillGithub />
+          <span>GitHub</span>
         </a>
       </div>
       <form
-        className='form-control mx-auto mt-auto self-center w-full max-w-md gap-5'
+        className='form-control mx-auto mt-auto self-center w-full max-w-md gap-2 md:gap-5'
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className='flex flex-col gap-2'>
@@ -97,7 +102,7 @@ function Login() {
 
           <input
             {...register('username', { required: true, minLength: 4 })}
-            className={`input ${
+            className={`input input-sm md:input-md ${
               errors.username ? 'input-error' : 'input-primary'
             }`}
             id='username'
@@ -108,7 +113,10 @@ function Login() {
           />
 
           {errors.username && (
-            <p id='usernameNote' className='label-text text-error'>
+            <p
+              id='usernameNote'
+              className='label-text text-error text-xs md:text-sm'
+            >
               Email or Username Is Required
             </p>
           )}
@@ -120,7 +128,7 @@ function Login() {
           </label>
           <input
             {...register('password', { required: true, minLength: 7 })}
-            className={`input ${
+            className={`input input-sm md:input-md ${
               errors.password ? 'input-error' : 'input-primary'
             }`}
             id='password'
@@ -131,7 +139,7 @@ function Login() {
           />
 
           {errors.password && (
-            <p className='label-text text-error'>
+            <p className='label-text text-error text-xs md:text-sm'>
               {errors.password.type === 'required'
                 ? 'Password Is Required'
                 : 'Password must be more than 7 characters'}
@@ -142,16 +150,16 @@ function Login() {
           disabled={isLoading}
           value='Login'
           type='submit'
-          className='btn btn-primary'
+          className='btn btn-sm md:btn-md btn-primary mt-3 md:mt-0'
         />
       </form>
-      <div className='mt-5 text-center'>
+      <div className='mt-5 text-center text-sm md:text-base'>
         <span>Don't have an Account 👉 </span>
         <Link className='text-primary' to='/signup'>
           Sign Up
         </Link>
       </div>
-      <div className='mt-2 text-center'>
+      <div className='mt-2 text-center text-sm md:text-base'>
         <Link className='text-primary' to='/reset-password'>
           Forgot Your Password
         </Link>

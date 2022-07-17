@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
 function Home() {
+  const { currentUser } = useAuth()
+
   return (
     <section className='mt-32 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8'>
       <div className='text-center space-y-4'>
@@ -21,12 +24,14 @@ function Home() {
         >
           Store Page
         </Link>
-        <Link
-          to='/signup'
-          className='px-10 py-3.5 w-full btn btn-outline sm:w-auto'
-        >
-          Sign Up
-        </Link>
+        {!currentUser && (
+          <Link
+            to='/signup'
+            className='px-10 py-3.5 w-full btn btn-outline sm:w-auto'
+          >
+            Sign Up
+          </Link>
+        )}
       </div>
     </section>
   )

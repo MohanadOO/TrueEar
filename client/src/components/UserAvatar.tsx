@@ -2,6 +2,7 @@ import { useAuth } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
 import { HiOutlineLogout, HiOutlinePencilAlt } from 'react-icons/hi'
 import toast from 'react-hot-toast'
+import { AiOutlineFormatPainter } from 'react-icons/ai'
 
 function UserAvatar() {
   const { currentUser, logOut } = useAuth()
@@ -9,6 +10,15 @@ function UserAvatar() {
   function signOut() {
     logOut()
     toast.success(<b>You Signed Out</b>)
+  }
+
+  function toggleTheme() {
+    if (localStorage.theme === 'night') {
+      localStorage.theme = 'light'
+      return (document.documentElement.dataset.theme = 'light')
+    }
+    localStorage.theme = 'night'
+    return (document.documentElement.dataset.theme = 'night')
   }
 
   return (
@@ -49,6 +59,12 @@ function UserAvatar() {
                 <HiOutlinePencilAlt /> Update Profile
               </Link>
             </li>
+            <li onClick={toggleTheme}>
+              <p>
+                <AiOutlineFormatPainter /> Toggle Theme
+              </p>
+            </li>
+            <hr className='border-base-content my-2' />
             <li>
               <a onClick={signOut}>
                 <HiOutlineLogout /> Logout

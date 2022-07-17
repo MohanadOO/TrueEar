@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client'
 import REGISTER from '../Graphql/SignUpQueries'
 
 import { useAuth } from '../context/AuthContext'
+import { AiFillGithub, AiFillGoogleCircle } from 'react-icons/ai'
 
 type Inputs = {
   username: string
@@ -73,16 +74,26 @@ function SignUp() {
   }
 
   return (
-    <section className='w-full max-w-sm card card-bordered bg-primary/5  p-10 mx-5 self-center my-auto'>
+    <section className='w-full max-w-xs md:max-w-sm card card-bordered bg-primary/5 py-5 px-8  md:p-10 mx-5 self-center my-auto max-h-[70vh] overflow-y-auto'>
       <h1 className='card-title text-center mb-3 mx-auto'>Sign Up</h1>
-      <div className='flex w-full justify-around mb-5'>
-          Google
+      <div className='flex justify-evenly w-full mb-3'>
+        <a
+          className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
+          href='https://f525-64-65-118-138.eu.ngrok.io/api/connect/google'
+        >
+          <AiFillGoogleCircle />
+          <span>Google</span>
         </a>
-          GitHub
+        <a
+          className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
+          href='https://f525-64-65-118-138.eu.ngrok.io/api/connect/github'
+        >
+          <AiFillGithub />
+          <span>GitHub</span>
         </a>
       </div>
       <form
-        className='form-control mx-auto mt-auto self-center w-full max-w-md gap-1'
+        className='form-control mx-auto self-center w-full max-w-md  gap-1'
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className='flex flex-col gap-1'>
@@ -91,7 +102,7 @@ function SignUp() {
           </label>
           <input
             {...register('username', { required: true, minLength: 4 })}
-            className={`input ${
+            className={`input input-sm  ${
               errors.username ? 'input-error' : 'input-primary'
             }`}
             id='username'
@@ -103,7 +114,10 @@ function SignUp() {
           />
 
           {errors.username && (
-            <p id='usernameNote' className='label-text text-error'>
+            <p
+              id='usernameNote'
+              className='label-text text-error text-xs md:text-sm'
+            >
               {errors.username.type === 'required'
                 ? 'Username Is Required'
                 : 'Username must be more than 4 characters'}
@@ -117,7 +131,7 @@ function SignUp() {
           </label>
           <input
             {...register('email', { required: true })}
-            className={`input ${
+            className={`input input-sm  ${
               errors.email ? 'input-error' : 'input-primary'
             }`}
             id='email'
@@ -129,7 +143,10 @@ function SignUp() {
           />
 
           {errors.email && (
-            <p id='emailNote' className='label-text text-error'>
+            <p
+              id='emailNote'
+              className='label-text text-error text-xs md:text-sm'
+            >
               Email Is Required
             </p>
           )}
@@ -141,7 +158,7 @@ function SignUp() {
           </label>
           <input
             {...register('password', { required: true, minLength: 7 })}
-            className={`input ${
+            className={`input input-sm  ${
               errors.password ? 'input-error' : 'input-primary'
             }`}
             id='password'
@@ -152,7 +169,7 @@ function SignUp() {
           />
 
           {errors.password && (
-            <p className='label-text text-error'>
+            <p className='label-text text-error text-xs md:text-sm'>
               {errors.password.type === 'required'
                 ? 'Password Is Required'
                 : 'Password must be more than 7 characters'}
@@ -169,7 +186,7 @@ function SignUp() {
               required: true,
               minLength: 7,
             })}
-            className={`input ${
+            className={`input input-sm  ${
               errors.confirmPassword ? 'input-error' : 'input-primary'
             }`}
             id='confirmPassword'
@@ -180,7 +197,10 @@ function SignUp() {
           />
 
           {errors.confirmPassword && (
-            <p id='confirmPasswordNote' className='label-text text-error'>
+            <p
+              id='confirmPasswordNote'
+              className='label-text text-error text-xs md:text-sm'
+            >
               {errors.confirmPassword.type === 'required'
                 ? 'Confirm password Is Required'
                 : 'Password must be more than 7 characters'}
@@ -192,13 +212,13 @@ function SignUp() {
           disabled={isLoading}
           value='Signup'
           type='submit'
-          className='btn btn-primary'
+          className='btn btn-sm md:btn-md btn-primary'
         />
       </form>
 
-      <div className='mt-3'>
+      <div className='mt-3 text-cetner text-sm md:text-base'>
         <span>Have An account Already 👉 </span>
-        <Link className='text-primary' to='/login'>
+        <Link className='text-primary ' to='/login'>
           Login
         </Link>
       </div>

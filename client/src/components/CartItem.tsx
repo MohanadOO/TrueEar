@@ -30,8 +30,8 @@ function CartItem({ id, quantity }: CartItemProps) {
   const item = data.item.data
 
   return (
-    <div id='cart-item'>
-      <div className='flex items-center gap-5 h-24 rounded-box'>
+    <div id='cart-item '>
+      <div className='flex flex-col md:flex-row text-center md:text-left items-center gap-2 md:gap-5 md:h-24 rounded-box'>
         <figure>
           <Link to={`store/${id}`}>
             <img
@@ -47,7 +47,7 @@ function CartItem({ id, quantity }: CartItemProps) {
             <span className='ml-2 font-bold text-primary'>x{quantity}</span>
           </p>
           <span>{formatCurrency(item.attributes.price)}</span>
-          <div className='my-3 flex gap-2 items-center'>
+          <div className='my-3 flex gap-2 items-center justify-center md:justify-start'>
             <button
               onClick={() => decreaseCartQuantity(id)}
               className='btn btn-outline btn-sm'
@@ -60,14 +60,20 @@ function CartItem({ id, quantity }: CartItemProps) {
             >
               +
             </button>
+            <button
+              onClick={() => removeFromCart(item.id)}
+              className='block md:hidden btn btn-error btn-sm btn-outline'
+            >
+              &times;
+            </button>
           </div>
         </div>
-        <div className='ml-auto'>
+        <div className='md:ml-auto'>
           <p>{formatCurrency(item.attributes.price * quantity)}</p>
         </div>
         <button
           onClick={() => removeFromCart(item.id)}
-          className='btn btn-error btn-sm btn-outline'
+          className='hidden md:block btn btn-error btn-sm btn-outline'
         >
           &times;
         </button>
