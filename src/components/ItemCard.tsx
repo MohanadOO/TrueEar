@@ -31,15 +31,14 @@ function ItemCard({ id, title, price, stars, img }: ItemCardProps) {
   return (
     <div id='card' className='card card-bordered bg-primary/5 shadow-xl'>
       <figure>
-        <Link
-          className='h-[220px] w-full object-cover rounded-sm'
-          to={`/store/${id}`}
-        >
-          <img
-            className='h-[220px] w-full object-cover rounded-sm'
-            src={img.data?.attributes.formats.medium.url}
-            alt={`${title}_img`}
-          />
+        <Link className='w-full rounded-sm' to={`/store/${id}`}>
+          <div className='scale-110 hover:scale-100 transition-transform duration-200 bg-white'>
+            <img
+              className='h-[230px] aspect-video object-contain object-center rounded-md'
+              src={img.data?.attributes.formats.medium.url}
+              alt={`${title}_img`}
+            />
+          </div>
         </Link>
       </figure>
       <div className='card-body'>
