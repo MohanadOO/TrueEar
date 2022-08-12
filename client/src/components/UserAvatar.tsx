@@ -24,7 +24,7 @@ function UserAvatar() {
   return (
     <>
       {!currentUser ? (
-        <li className='ml-auto '>
+        <li className='ml-auto'>
           <Link className='btn btn-primary btn-outline' to='/login'>
             Log In
           </Link>

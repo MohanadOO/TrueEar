@@ -33,18 +33,18 @@ function App() {
   return (
     <ShoppingCartProvider>
       <Toaster />
-      <main className='flex flex-col min-h-screen'>
+      <main className='flex flex-col min-h-screen justify-center'>
         <Nav />
         <Routes>
           {/* Public Routes */}
           <Route path='/' element={<Home />} />
           <Route path='store' element={<Store />} />
           <Route
-            path={`connect/google/redirect`}
+            path='connect/google/redirect'
             element={<HandleAccess provider='google' />}
           />
           <Route
-            path={`connect/github/redirect`}
+            path='connect/github/redirect'
             element={<HandleAccess provider='github' />}
           />
           <Route path='store/:id' element={<Product />} />

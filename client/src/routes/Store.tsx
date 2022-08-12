@@ -1,30 +1,10 @@
 import Products from '../components/Products'
 
 //Use GraphQl queries
-import { useQuery, gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import ITEMS from '../Graphql/StoreQueries'
 
-//Items GraphQl query
-const ITEMS = gql`
-  query GetItems {
-    items {
-      data {
-        id
-        attributes {
-          title
-          price
-          stars
-          img {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
+import ClipLoader from 'react-spinners/ClipLoader'
 
 type itemType = {
   attributes: {
@@ -41,14 +21,14 @@ function Store() {
   if (loading) {
     return (
       <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
-        Loading...
+        <ClipLoader size='75px' color='blue' />
       </div>
     )
   }
   if (error) {
     return (
-      <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
-        Error
+      <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center text-3xl text-error capitalize'>
+        Error ❌
       </div>
     )
   }

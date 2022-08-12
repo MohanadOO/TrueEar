@@ -7,7 +7,7 @@ import {
 
 function Footer() {
   return (
-    <footer className='absolute bottom-0 py-3 md:py-5 px-5 md:px-10 w-full bg-gradient-to-r from-primary/70 to-secondary/60 shadow-md flex items-center justify-around  font-semibold text-sm'>
+    <footer className='absolute bottom-0 py-3 px-5 md:px-10 w-full bg-gradient-to-r from-primary/70 to-secondary/60 shadow-md flex items-center justify-around  font-semibold text-sm'>
       <p className='flex items-center gap-2'>
         Made By Mohanad <AiFillHeart className='w-5 h-5 fill-red-500 inline' />
       </p>

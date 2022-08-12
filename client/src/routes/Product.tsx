@@ -3,9 +3,11 @@ import { useParams } from 'react-router-dom'
 import { formatCurrency } from '../utilities/formatCurrency'
 import { toast } from 'react-hot-toast'
 import { useShoppingCart } from '../context/ShoppingCartContext'
+import ClipLoader from 'react-spinners/ClipLoader'
 
 //Using Graphql queries
-import { useQuery, gql } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import ITEM from '../Graphql/ProductQueries'
 
 type Product = {
   id: number
@@ -13,29 +15,6 @@ type Product = {
   price: number
   start: number
 }
-
-//Item GraphQl query
-const ITEM = gql`
-  query GetItem($id: ID!) {
-    item(id: $id) {
-      data {
-        id
-        attributes {
-          title
-          price
-          stars
-          img {
-            data {
-              attributes {
-                formats
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 function Product() {
   const { id } = useParams()
@@ -45,8 +24,18 @@ function Product() {
     variables: { id: id },
   })
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error ❌</p>
+  if (loading)
+    return (
+      <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
+        <ClipLoader size='75px' color='blue' />
+      </div>
+    )
+  if (error)
+    return (
+      <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
+        <p className='text-3xl text-error capitalize'>Error ❌</p>
+      </div>
+    )
 
   const item = data.item.data
 
@@ -60,8 +49,8 @@ function Product() {
     >
       <figure>
         <img
-          className='md:h-[350px]  object-cover rounded-md'
-          src={`http://localhost:1337${item.attributes.img.data.attributes.formats.large.url}`}
+          className='aspect-[16/9] w-full object-cover rounded-md'
+          src={item.attributes.img.data.attributes.formats.large.url}
           alt={`${item.attributes.title}_img`}
         />
       </figure>

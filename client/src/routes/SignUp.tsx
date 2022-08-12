@@ -60,14 +60,23 @@ function SignUp() {
           setIsLoading(false)
 
           const token = data.register.jwt
-          const user = data.login.user
+          const user = data.register.user
 
           localStorage.setItem('token', token)
           setCurrentUser(user)
 
           navigate(from, { replace: true })
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(error)
+          toast.error(
+            <>
+              <b>{error.message}</b>
+              <Link to='login' className='ml-1 text-accent underline'>
+                Login
+              </Link>
+            </>
+          )
           setIsLoading(false)
         })
     }
@@ -79,14 +88,14 @@ function SignUp() {
       <div className='flex justify-evenly w-full mb-3'>
         <a
           className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
-          href='https://f525-64-65-118-138.eu.ngrok.io/api/connect/google'
+          href=' https://4d9a-5-156-54-207.eu.ngrok.io/api/connect/google'
         >
           <AiFillGoogleCircle />
           <span>Google</span>
         </a>
         <a
           className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
-          href='https://f525-64-65-118-138.eu.ngrok.io/api/connect/github'
+          href=' https://4d9a-5-156-54-207.eu.ngrok.io/api/connect/github'
         >
           <AiFillGithub />
           <span>GitHub</span>

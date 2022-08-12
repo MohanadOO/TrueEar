@@ -5,7 +5,7 @@ function Home() {
   const { currentUser } = useAuth()
 
   return (
-    <section className='mt-32 mx-auto max-w-screen-xl pb-4 px-4 sm:px-8'>
+    <section className='pb-4 px-4 sm:px-8'>
       <div className='text-center space-y-4'>
         <h1 className=' font-bold text-4xl md:text-5xl'>
           The Best
