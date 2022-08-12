@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { Navigate, useSearchParams } from 'react-router-dom'
+import { ClipLoader } from 'react-spinners'
 import { useAuth } from '../context/AuthContext'
 
 function HandleAccess({ provider }: { provider: String }) {
@@ -54,7 +55,9 @@ function HandleAccess({ provider }: { provider: String }) {
   return (
     <>
       {isLoading ? (
-        <div>Loading...</div>
+        <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
+          <ClipLoader size='75px' color='blue' />
+        </div>
       ) : (
         <>
           {success ? (
