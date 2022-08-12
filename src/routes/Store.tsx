@@ -2,30 +2,37 @@ import Products from '../components/Products'
 
 //Use GraphQl queries
 import { useQuery } from '@apollo/client'
-import ITEMS from '../Graphql/StoreQueries'
+import { ITEMS, STORE_SECTIONS } from '../Graphql/StoreQueries'
 
 import ClipLoader from 'react-spinners/ClipLoader'
 
-type itemType = {
-  attributes: {
-    price: number
-    stars: number
-    title: string
-  }
+type StoreSections = {
   id: number
+  attributes: {
+    section_name: string
+    sub_text: string
+    items: {
+      data: any
+    }
+  }
 }
 
 function Store() {
-  const { loading, error, data } = useQuery(ITEMS)
+  const { loading, error, data } = useQuery(STORE_SECTIONS)
+  const {
+    loading: itemsLoading,
+    error: itemsError,
+    data: itemsData,
+  } = useQuery(ITEMS)
 
-  if (loading) {
+  if (loading || itemsLoading) {
     return (
       <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
         <ClipLoader size='75px' color='blue' />
       </div>
     )
   }
-  if (error) {
+  if (error || itemsError) {
     return (
       <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center text-3xl text-error capitalize'>
         Error ❌
@@ -33,40 +40,23 @@ function Store() {
     )
   }
 
-  const items = data.items.data
-
-  const bestProducts = items.filter(
-    (item: itemType) => item.attributes.stars >= 4
-  )
-  const popularProducts = items.filter(
-    (item: itemType) =>
-      item.attributes.stars >= 4 && item.attributes.price <= 50
-  )
-
-  const mostSelling = items.filter(
-    (item: itemType) => item.attributes.price <= 50
-  )
-
   return (
     <section className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
-      {/* Most Selling*/}
-      <Products products={mostSelling}>
-        <h1 className='text-3xl mb-2 text-primary'>Most Selling</h1>
-        <p>Our Collection of the most selling products</p>
-      </Products>
+      {data.storeSections.data.map((sections: StoreSections) => {
+        const { section_name, sub_text } = sections.attributes
+        const sectionData = sections.attributes.items.data
+        console.log(sectionData)
+        return (
+          <Products products={sectionData}>
+            <h1 className='text-3xl mb-2 text-primary'>{section_name}</h1>
+            <p>{sub_text}</p>
+          </Products>
+        )
+      })}
 
-      {/* Best Products */}
-      <Products products={bestProducts}>
-        <h1 className='text-3xl mb-2 font-bold text-primary'>Best Products</h1>
-        <p>Our Collection of the best products</p>
-      </Products>
-
-      {/* Popular Products */}
-      <Products products={popularProducts}>
-        <h1 className='text-3xl mb-2 font-bold text-primary'>
-          Popular Products
-        </h1>
-        <p>Our Collection of the most paid products</p>
+      {/* All Products */}
+      <Products products={itemsData.items.data}>
+        <h1 className='text-3xl mb-2 font-bold text-primary'>All Products</h1>
       </Products>
     </section>
   )
