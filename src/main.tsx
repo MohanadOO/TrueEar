@@ -14,7 +14,7 @@ import {
 } from '@apollo/client'
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:1330/graphql',
+  uri: 'https://true-ear.herokuapp.com/graphql',
   credentials: 'same-origin',
 })
 
