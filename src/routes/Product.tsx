@@ -38,7 +38,7 @@ function Product() {
     )
 
   const item = data.item.data
-
+  const imgAttributes = item.attributes.img.data.attributes
   const filledStars = Array(item.attributes.stars).fill(true)
   const emptyStars = Array(5 - item.attributes.stars).fill(true)
 
@@ -50,7 +50,7 @@ function Product() {
       <figure>
         <img
           className='aspect-[16/9] w-full object-cover rounded-md'
-          src={item.attributes.img.data.attributes.formats.large.url}
+          src={imgAttributes.formats.large?.url || imgAttributes.url}
           alt={`${item.attributes.title}_img`}
         />
       </figure>

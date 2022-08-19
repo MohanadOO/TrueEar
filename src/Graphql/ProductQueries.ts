@@ -12,6 +12,7 @@ const ITEM = gql`
           img {
             data {
               attributes {
+                url
                 formats
               }
             }
