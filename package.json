@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "axios": "^0.27.2",
     "daisyui": "^2.17.0",
     "framer-motion": "^6.3.12",
     "graphql": "^16.6.0",

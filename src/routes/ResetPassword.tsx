@@ -4,6 +4,7 @@ import toast from 'react-hot-toast'
 import { useState } from 'react'
 
 import { useAuth } from '../context/AuthContext'
+import axios from 'axios'
 
 type Inputs = {
   email: string
@@ -23,19 +24,15 @@ function ResetPassword() {
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     // setLoading(true)
 
-    toast
-      .promise(resetPassword(data.email), {
-        loading: <b>Send Reset Message...</b>,
-        error: <b>Something Wrong Happen</b>,
-        success: <b>Check Your Email to reset your password</b>,
+    axios
+      .post(`${import.meta.env.VITE_SERVER_URL}/api/auth/forgot-password`, {
+        email: data.email,
       })
-      .then(() => {
-        setLoading(false)
-        // navigate('/login', { replace: true })
+      .then((response) => {
+        console.log('Your user received an email')
       })
       .catch((error) => {
-        setLoading(false)
-        toast.error(error.message)
+        console.log('An error occurred:', error.response)
       })
   }
 

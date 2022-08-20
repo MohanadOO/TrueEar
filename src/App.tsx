@@ -59,7 +59,7 @@ function App() {
           <Route element={<PublicRoute />}>
             <Route path='signup' element={<SignUp />} />
             <Route path='login' element={<Login />} />
-            <Route path='reset-password' element={<ResetPassword />} />
+            {/* <Route path='reset-password' element={<ResetPassword />} /> */}
           </Route>
 
           <Route path='*' element={<ErrorPage />} />

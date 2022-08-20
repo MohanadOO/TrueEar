@@ -159,11 +159,11 @@ function Login() {
           Sign Up
         </Link>
       </div>
-      <div className='mt-2 text-center text-sm md:text-base'>
+      {/* <div className='mt-2 text-center text-sm md:text-base'>
         <Link className='text-primary' to='/reset-password'>
           Forgot Your Password
         </Link>
-      </div>
+      </div> */}
     </div>
   )
 }

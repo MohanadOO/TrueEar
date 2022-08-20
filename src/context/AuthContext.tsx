@@ -26,22 +26,6 @@ export function AuthProvider({ children }: any) {
     localStorage.removeItem('token')
   }
 
-  async function resetPassword(email: string) {
-    try {
-      const res = await fetch(
-        `${import.meta.env.VITE_SERVER_URL}/api/auth/forgot-password`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email }),
-        }
-      )
-      return console.log(res)
-    } catch (error) {
-      return console.error(error)
-    }
-  }
-
   function updateProfile(email: string) {
     return ''
   }
@@ -69,7 +53,6 @@ export function AuthProvider({ children }: any) {
     signUp,
     login,
     logOut,
-    resetPassword,
     updateProfile,
   }
 
