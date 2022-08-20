@@ -29,7 +29,7 @@ export function AuthProvider({ children }: any) {
   async function resetPassword(email: string) {
     try {
       const res = await fetch(
-        'http://localhost:1330/api/auth/forgot-password',
+        `${import.meta.env.VITE_SERVER_URL}/api/auth/forgot-password`,
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

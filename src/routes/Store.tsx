@@ -45,7 +45,6 @@ function Store() {
       {data.storeSections.data.map((sections: StoreSections) => {
         const { section_name, sub_text } = sections.attributes
         const sectionData = sections.attributes.items.data
-        console.log(sectionData)
         return (
           <Products products={sectionData}>
             <h1 className='text-3xl mb-2 text-primary'>{section_name}</h1>

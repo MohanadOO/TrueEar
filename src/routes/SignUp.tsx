@@ -88,14 +88,14 @@ function SignUp() {
       <div className='flex justify-evenly w-full mb-3'>
         <a
           className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
-          href=' https://4d9a-5-156-54-207.eu.ngrok.io/api/connect/google'
+          href={`${import.meta.env.VITE_SERVER_URL}/api/connect/google`}
         >
           <AiFillGoogleCircle />
           <span>Google</span>
         </a>
         <a
           className='btn btn-sm md:btn-md btn-outline capitalize flex gap-2'
-          href=' https://4d9a-5-156-54-207.eu.ngrok.io/api/connect/github'
+          href={`${import.meta.env.VITE_SERVER_URL}/api/connect/github`}
         >
           <AiFillGithub />
           <span>GitHub</span>

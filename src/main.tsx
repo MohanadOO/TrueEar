@@ -14,7 +14,7 @@ import {
 } from '@apollo/client'
 
 const httpLink = createHttpLink({
-  uri: 'https://true-ear.herokuapp.com/graphql',
+  uri: `${import.meta.env.VITE_SERVER_URL}/graphql`,
   credentials: 'same-origin',
 })
 

@@ -11,7 +11,9 @@ function HandleAccess({ provider }: { provider: String }) {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const access_token = searchParams.get('access_token')
-  const backendURL = `http://localhost:1330/api/auth/${provider}/callback`
+  const backendURL = `${
+    import.meta.env.VITE_SERVER_URL
+  }/api/auth/${provider}/callback`
 
   const { setCurrentUser } = useAuth()
 
@@ -36,7 +38,6 @@ function HandleAccess({ provider }: { provider: String }) {
       } else {
         const token = data.jwt
         const user = data.user
-        console.log(user)
         localStorage.setItem('token', token)
         setCurrentUser(user)
         setIsLoading(false)

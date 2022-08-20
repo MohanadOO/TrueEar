@@ -74,13 +74,16 @@ function UpdateProfile() {
     formData.append('files', file)
 
     try {
-      const upload = await fetch('http://localhost:1330/api/upload', {
-        method: 'POST',
-        body: formData,
-        headers: new Headers({
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        }),
-      })
+      const upload = await fetch(
+        `${import.meta.env.VITE_SERVER_URL}/api/upload`,
+        {
+          method: 'POST',
+          body: formData,
+          headers: new Headers({
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          }),
+        }
+      )
       const data = await upload.json()
       const thumbnailImage = data[0].formats?.thumbnail.url || data[0].url
       handleUpdateUserInfo({
