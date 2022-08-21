@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 
+import { motion } from 'framer-motion'
+
 type ItemCardProps = {
   id: number
   title: string
@@ -22,6 +24,11 @@ type ItemCardProps = {
   }
 }
 
+const itemCardVariant = {
+  initial: { scale: '0', opacity: 0, x: '-20' },
+  animate: { scale: '1', opacity: 1, x: '0' },
+}
+
 function ItemCard({ id, title, price, stars, img }: ItemCardProps) {
   const filledStars = Array(stars).fill(true)
   const emptyStars = Array(5 - stars).fill(true)
@@ -29,7 +36,11 @@ function ItemCard({ id, title, price, stars, img }: ItemCardProps) {
   const { increaseCartQuantity } = useShoppingCart()
 
   return (
-    <div id='card' className='card card-bordered bg-primary/5 shadow-xl'>
+    <motion.div
+      variants={itemCardVariant}
+      id='card'
+      className='card card-bordered bg-primary/5 shadow-xl'
+    >
       <figure>
         <Link className='w-full rounded-sm' to={`/store/${id}`}>
           <div className='scale-110 hover:scale-100 transition-transform duration-200 bg-white'>
@@ -70,7 +81,7 @@ function ItemCard({ id, title, price, stars, img }: ItemCardProps) {
           + Add To Cart
         </button>
       </div>
-    </div>
+    </motion.div>
   )
 }
 

@@ -25,12 +25,15 @@ function UserAvatar() {
     <>
       {!currentUser ? (
         <li className='ml-auto'>
-          <Link className='btn btn-primary btn-outline' to='/login'>
+          <Link
+            className='btn btn-primary btn-outline btn-sm md:btn-md mr-2'
+            to='/login'
+          >
             Log In
           </Link>
         </li>
       ) : (
-        <li className='ml-auto dropdown dropdown-end'>
+        <li className='ml-auto dropdown dropdown-end mr-2'>
           <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
             <div className='w-10 rounded-full'>
               {currentUser?.avatar ? (

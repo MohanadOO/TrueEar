@@ -1,6 +1,8 @@
 import { ReactNode } from 'react'
 import ItemCard from './ItemCard'
 
+import { motion } from 'framer-motion'
+
 type itemAttributesType = {
   title: string
   price: number
@@ -29,17 +31,37 @@ type ProductsType = {
   products: ProductType
 }
 
+const productsVariant = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    transition: {
+      duration: 0.2,
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+}
+
 function Products({ children, products }: ProductsType) {
   return (
     <>
       {children}
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 my-10 max-w-4xl h-full'>
+      <motion.div
+        variants={productsVariant}
+        initial='initial'
+        whileInView='animate'
+        viewport={{ once: true }}
+        className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 my-10 max-w-4xl h-full'
+      >
         {products.map((item: ProductType) => {
           return (
             <ItemCard key={item.id} {...{ id: item.id, ...item.attributes }} />
           )
         })}
-      </div>
+      </motion.div>
     </>
   )
 }

@@ -5,6 +5,8 @@ import { toast } from 'react-hot-toast'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 import ClipLoader from 'react-spinners/ClipLoader'
 
+import { motion } from 'framer-motion'
+
 //Using Graphql queries
 import { useQuery } from '@apollo/client'
 import ITEM from '../Graphql/ProductQueries'
@@ -30,10 +32,10 @@ function Product() {
         <ClipLoader size='75px' color='blue' />
       </div>
     )
-  if (error)
+  if (error || !data.item.data?.attributes)
     return (
       <div className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
-        <p className='text-3xl text-error capitalize'>Error ❌</p>
+        <p className='text-3xl text-error capitalize'>Can't Find Item ❌</p>
       </div>
     )
 
@@ -43,18 +45,20 @@ function Product() {
   const emptyStars = Array(5 - item.attributes.stars).fill(true)
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       id='card'
-      className='card card-compact md:card-side absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] max-w-4xl'
+      className='card card-compact lg:card-side lg:gap-10 self-center max-w-lg mx-5 lg:max-w-3xl overflow-hidden ring-2 ring-primary p-5 lg:p-10'
     >
       <figure>
         <img
-          className='aspect-[16/9] w-full object-cover rounded-md'
+          className='aspect-[16/9] w-full object-contain'
           src={imgAttributes.formats.large?.url || imgAttributes.url}
           alt={`${item.attributes.title}_img`}
         />
       </figure>
-      <div className='card-body justify-center'>
+      <div className='card-body justify-center max-w-lg w-full'>
         <div>
           <h2
             className='card-title w-full truncate'
@@ -92,7 +96,7 @@ function Product() {
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
 
