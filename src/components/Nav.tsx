@@ -33,7 +33,7 @@ function Nav() {
   return (
     <header>
       <nav className='w-full fixed top-0 left-0 bg-base-100 z-10'>
-        <ul className='navbar flex items-center justify-between py-5 px-5 md:px-10 lg:px-24 xl:px-48'>
+        <ul className='navbar flex items-center justify-between py-5 px-5 md:px-10 lg:px-24 xl:px-48 shadow-sm'>
           <li>
             <Link
               className='hidden md:flex items-center font-bold p-2 badge badge-primary badge-lg cursor-pointer'
@@ -49,7 +49,7 @@ function Nav() {
             />
           </li>
           {openMenu && (
-            <ul className='menu shadow rounded-box absolute top-16 left-5 p-2 bg-base-100 -z-40 w-40'>
+            <ul className='menu shadow rounded-box absolute top-16 left-5 p-2 bg-base-100 -z-40 w-40 md:hidden'>
               <li>
                 <Link
                   to='/'
@@ -87,20 +87,6 @@ function Nav() {
                   Store <AiOutlineShopping />
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  onClick={() => setOpenMenu(false)}
-                  className={({ isActive }) =>
-                    'flex items-center gap-1 py-2 px-3 rounded-md transition-colors btn mt-2  md:hidden w-32 text-xs ' +
-                    (!isActive
-                      ? 'btn-ghost '
-                      : ' btn-primary shadow-md cursor-default')
-                  }
-                  to='/about'
-                >
-                  About <AiOutlineInfoCircle />
-                </NavLink>
-              </li>
             </ul>
           )}
 
@@ -130,20 +116,6 @@ function Nav() {
                 to='/store'
               >
                 Store <AiOutlineShopping />
-              </NavLink>
-            </li>
-
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  'flex items-center gap-1 py-2 px-3 rounded-md transition-colors btn ' +
-                  (!isActive
-                    ? 'btn-ghost '
-                    : ' btn-primary shadow-md cursor-default')
-                }
-                to='/about'
-              >
-                About <AiOutlineInfoCircle />
               </NavLink>
             </li>
           </ul>

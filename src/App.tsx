@@ -1,13 +1,12 @@
 //Pages and routes
 import PrivateRoute from './routes/PrivateRoute'
 import PublicRoute from './routes/PublicRoute'
-import About from './routes/About'
 import ErrorPage from './routes/ErrorPage'
 import Home from './routes/Home'
 import Product from './routes/Product'
 import SignUp from './routes/SignUp'
 import Login from './routes/Login'
-import ResetPassword from './routes/ResetPassword'
+// import ResetPassword from './routes/ResetPassword'
 import Store from './routes/Store'
 import UpdateProfile from './routes/UpdateProfile'
 import HandleAccess from './routes/HandleAccess'
@@ -48,7 +47,6 @@ function App() {
             element={<HandleAccess provider='github' />}
           />
           <Route path='store/:id' element={<Product />} />
-          <Route path='about' element={<About />} />
 
           {/* Private Routes */}
           <Route element={<PrivateRoute />}>
