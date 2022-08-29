@@ -18,12 +18,12 @@ function Footer() {
           </a>
         </li>
         <li>
-          <a href='https://twitter.com/Mohanad_OOO' target='_blank'>
+          <a href='https://twitter.com/MohanadOO_' target='_blank'>
             <AiFillTwitterCircle className=' w-6 h-6 hover:fill-secondary transition-colors' />
           </a>
         </li>
         <li>
-          <a href='https://mohanad-portfolio.pages.dev/' target='_blank'>
+          <a href='https://portfolio-mohanadoo.vercel.app/' target='_blank'>
             <AiFillProfile className=' w-6 h-6 hover:fill-secondary transition-colors' />
           </a>
         </li>
