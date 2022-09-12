@@ -13,17 +13,29 @@ function Footer() {
       </p>
       <ul className='flex gap-5'>
         <li>
-          <a href='https://github.com/MohanadOO' target='_blank'>
+          <a
+            aria-label='Mohanad GitHub'
+            href='https://github.com/MohanadOO'
+            target='_blank'
+          >
             <AiFillGithub className=' w-6 h-6 hover:fill-secondary transition-colors' />
           </a>
         </li>
         <li>
-          <a href='https://twitter.com/MohanadOO_' target='_blank'>
+          <a
+            aria-label='Mohanad Twitter'
+            href='https://twitter.com/MohanadOO_'
+            target='_blank'
+          >
             <AiFillTwitterCircle className=' w-6 h-6 hover:fill-secondary transition-colors' />
           </a>
         </li>
         <li>
-          <a href='https://portfolio-mohanadoo.vercel.app/' target='_blank'>
+          <a
+            aria-label='Mohanad Website'
+            href='https://portfolio-mohanadoo.vercel.app/'
+            target='_blank'
+          >
             <AiFillProfile className=' w-6 h-6 hover:fill-secondary transition-colors' />
           </a>
         </li>

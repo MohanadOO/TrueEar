@@ -45,7 +45,8 @@ function Product() {
   const emptyStars = Array(5 - item.attributes.stars).fill(true)
 
   return (
-    <motion.div
+    <motion.section
+      aria-labelledby='item-name'
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       id='card'
@@ -55,24 +56,31 @@ function Product() {
         <img
           className='aspect-[16/9] w-full object-contain'
           src={imgAttributes.formats.large?.url || imgAttributes.url}
-          alt={`${item.attributes.title}_img`}
+          alt={`${item.attributes.title}`}
         />
       </figure>
       <div className='card-body justify-center max-w-lg w-full'>
-        <div>
-          <h2
+        <header>
+          <h1
+            id='item-name'
             className='card-title w-full truncate'
             title={item.attributes.title}
           >
             {item.attributes.title}
-          </h2>
-          <p className='text-accent'>{formatCurrency(item.attributes.price)}</p>
-        </div>
-        <div className='flex mt-3'>
-          {filledStars.map((length, index) => {
+          </h1>
+          <p tabIndex={0} className='text-accent'>
+            {formatCurrency(item.attributes.price)}
+          </p>
+        </header>
+        <div
+          tabIndex={0}
+          aria-label={`${filledStars.length} Stars`}
+          className='flex mt-3'
+        >
+          {filledStars.map((_, index) => {
             return <AiFillStar key={index} className='w-5 h-5 text-warning' />
           })}
-          {emptyStars.map((length, index) => (
+          {emptyStars.map((_, index) => (
             <AiOutlineStar key={index} className='w-5 h-5 text-warning' />
           ))}
         </div>
@@ -96,7 +104,7 @@ function Product() {
           </button>
         </div>
       </div>
-    </motion.div>
+    </motion.section>
   )
 }
 

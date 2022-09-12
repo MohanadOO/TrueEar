@@ -35,9 +35,9 @@ function UserAvatar() {
       ) : (
         <li className='ml-auto dropdown dropdown-end mr-2'>
           <label tabIndex={0} className='btn btn-ghost btn-circle avatar'>
-            <div className='w-10 rounded-full'>
+            <div aria-label='User Profile Menu' className='w-10 rounded-full'>
               {currentUser?.avatar ? (
-                <img src={currentUser.avatar} />
+                <img src={currentUser.avatar} alt='User Profile' />
               ) : (
                 <div className='avatar placeholder'>
                   <div className='bg-neutral-focus text-neutral-content rounded-full w-10'>
@@ -54,8 +54,8 @@ function UserAvatar() {
             className='menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52'
           >
             <li className='menu-title mb-3'>
-              <span>{currentUser.username}</span>
-              <span>{currentUser.email}</span>
+              <span aria-label='Username'>{currentUser.username}</span>
+              <span aria-label='Email'>{currentUser.email}</span>
             </li>
             <li>
               <Link to='/update-profile'>
@@ -63,15 +63,15 @@ function UserAvatar() {
               </Link>
             </li>
             <li onClick={toggleTheme}>
-              <p>
+              <button>
                 <AiOutlineFormatPainter /> Toggle Theme
-              </p>
+              </button>
             </li>
             <hr className='border-base-content my-2' />
             <li>
-              <a onClick={signOut}>
+              <button onClick={signOut}>
                 <HiOutlineLogout /> Logout
-              </a>
+              </button>
             </li>
           </ul>
         </li>

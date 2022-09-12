@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
@@ -7,7 +8,12 @@ module.exports = {
     },
     extend: {},
   },
-  plugins: [require('daisyui')],
+  plugins: [
+    require('daisyui'),
+    plugin(function ({ addVariant }) {
+      addVariant('night', '[data-theme="night"] &')
+    }),
+  ],
   daisyui: {
     themes: ['emerald', 'night'],
   },

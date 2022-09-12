@@ -41,21 +41,28 @@ function Store() {
   }
 
   return (
-    <section className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'>
+    <section
+      aria-label='Store Page'
+      className='my-32 mx-5 md:mx-10 lg:mx-32 flex flex-col items-center justify-center'
+    >
       {data.storeSections.data.map((sections: StoreSections) => {
         const { section_name, sub_text } = sections.attributes
         const sectionData = sections.attributes.items.data
         return (
-          <Products products={sectionData}>
-            <h1 className='text-3xl mb-2 text-primary'>{section_name}</h1>
-            <p>{sub_text}</p>
+          <Products products={sectionData} sectionName={section_name}>
+            <header className='text-center'>
+              <h1 className='text-3xl mb-2 text-primary'>{section_name}</h1>
+              <p>{sub_text}</p>
+            </header>
           </Products>
         )
       })}
 
       {/* All Products */}
-      <Products products={itemsData.items.data}>
-        <h1 className='text-3xl mb-2 font-bold text-primary'>All Products</h1>
+      <Products products={itemsData.items.data} sectionName='All Products'>
+        <header className='text-center'>
+          <h1 className='text-3xl mb-2 font-bold text-primary'>All Products</h1>
+        </header>
       </Products>
     </section>
   )

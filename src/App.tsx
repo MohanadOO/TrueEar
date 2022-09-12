@@ -62,8 +62,8 @@ function App() {
 
           <Route path='*' element={<ErrorPage />} />
         </Routes>
-        <Footer />
       </main>
+      <Footer />
     </ShoppingCartProvider>
   )
 }

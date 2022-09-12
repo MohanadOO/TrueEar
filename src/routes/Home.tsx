@@ -5,9 +5,12 @@ function Home() {
   const { currentUser } = useAuth()
 
   return (
-    <section className='pb-4 px-4 sm:px-8 flex flex-col lg:flex-row justify-between items-center self-center mt-36 lg:mt-0 lg:gap-24'>
+    <section
+      aria-label='Home Page'
+      className='pb-4 px-4 sm:px-8 flex flex-col lg:flex-row justify-between items-center self-center mt-36 lg:mt-0 lg:gap-24'
+    >
       <div className='lg:max-w-xl'>
-        <div className='text-center lg:text-left space-y-4'>
+        <header className='text-center lg:text-left space-y-4'>
           <h1 className='font-bold text-4xl md:text-5xl lg:text-6xl'>
             Only
             <span className='text-primary'> The Best </span>
@@ -17,7 +20,7 @@ function Home() {
             Get Rid of annoying Wires and Embrace the feel of premium True
             Wireless Earbuds
           </p>
-        </div>
+        </header>
         <div className='mt-12 justify-center items-center lg:justify-start space-y-3 sm:space-x-6 sm:space-y-0 sm:flex'>
           <Link
             to='/store'

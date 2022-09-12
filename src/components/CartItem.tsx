@@ -30,11 +30,12 @@ function CartItem({ id, quantity }: CartItemProps) {
   const item = data.item.data
 
   return (
-    <div id='cart-item '>
+    <div id='cart-item'>
       <div className='flex flex-col md:flex-row text-center md:text-left items-center gap-2 md:gap-5 md:h-24 rounded-box'>
         <figure>
-          <Link to={`store/${id}`}>
+          <Link aria-label={item.attributes.title} to={`store/${id}`}>
             <img
+              aria-label='hidden'
               className='h-24 w-32 object-cover rounded-lg'
               src={item.attributes.img.data.attributes.formats.thumbnail.url}
               alt={`${item.attributes.title}_avatar`}
@@ -42,25 +43,28 @@ function CartItem({ id, quantity }: CartItemProps) {
           </Link>
         </figure>
         <div className='flex-1'>
-          <p className='text-sm font-bold'>
+          <p tabIndex={0} className='text-sm font-bold'>
             {item.attributes.title}
             <span className='ml-2 font-bold text-primary'>x{quantity}</span>
           </p>
-          <span>{formatCurrency(item.attributes.price)}</span>
+          <p tabIndex={0}>{formatCurrency(item.attributes.price)}</p>
           <div className='my-3 flex gap-2 items-center justify-center md:justify-start'>
             <button
+              aria-label={`Decrease ${item.attributes.title} By One`}
               onClick={() => decreaseCartQuantity(id)}
               className='btn btn-outline btn-sm'
             >
               -
             </button>
             <button
+              aria-label={`Increase ${item.attributes.title} By One`}
               onClick={() => increaseCartQuantity(id)}
               className='btn btn-outline btn-sm'
             >
               +
             </button>
             <button
+              aria-label={`Delete ${item.attributes.title}`}
               onClick={() => removeFromCart(item.id)}
               className='block md:hidden btn btn-error btn-sm btn-outline'
             >
@@ -69,9 +73,10 @@ function CartItem({ id, quantity }: CartItemProps) {
           </div>
         </div>
         <div className='md:ml-auto'>
-          <p>{formatCurrency(item.attributes.price * quantity)}</p>
+          <p tabIndex={0}>{formatCurrency(item.attributes.price * quantity)}</p>
         </div>
         <button
+          aria-label={`Delete ${item.attributes.title}`}
           onClick={() => removeFromCart(item.id)}
           className='hidden md:block btn btn-error btn-sm btn-outline'
         >

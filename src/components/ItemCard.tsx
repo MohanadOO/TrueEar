@@ -47,17 +47,24 @@ function ItemCard({ id, title, price, stars, img }: ItemCardProps) {
             <img
               className='h-[230px] aspect-video object-contain object-center rounded-md'
               src={img.data?.attributes.formats.medium.url}
-              alt={`${title}_img`}
+              alt={`${title}`}
             />
           </div>
         </Link>
       </figure>
       <div className='card-body'>
-        <h2 className='card-title  w-full truncate' title={title}>
+        <h2 tabIndex={0} className='card-title  w-full truncate' title={title}>
           {title}
         </h2>
-        <p className='text-accent'>{formatCurrency(price)}</p>
-        <div className='flex mt-3'>
+        <p tabIndex={0} className='text-accent'>
+          {formatCurrency(price)}
+        </p>
+
+        <div
+          tabIndex={0}
+          aria-label={`${filledStars.length} Stars`}
+          className='flex mt-3'
+        >
           {filledStars.map((length, index) => {
             return <AiFillStar key={index} className='w-5 h-5 text-warning' />
           })}

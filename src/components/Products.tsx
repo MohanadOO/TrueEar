@@ -29,6 +29,7 @@ type ProductType = {
 type ProductsType = {
   children: ReactNode
   products: ProductType
+  sectionName: string
 }
 
 const productsVariant = {
@@ -45,9 +46,10 @@ const productsVariant = {
   },
 }
 
-function Products({ children, products }: ProductsType) {
+function Products({ children, products, sectionName }: ProductsType) {
+  console.log(sectionName)
   return (
-    <>
+    <section aria-label={sectionName}>
       {children}
       <motion.div
         variants={productsVariant}
@@ -62,7 +64,7 @@ function Products({ children, products }: ProductsType) {
           )
         })}
       </motion.div>
-    </>
+    </section>
   )
 }
 
